@@ -44,17 +44,28 @@ class App extends Component {
           />
         </header>
         <content>
-          <ul>
-            {filteredPersons.map((person, id) => (
-              <li key={id}>
-                {person.id}
-                {person.name}
-                {person.age}
-                {person.city}
-                {person.weight}
-              </li>
-            ))}
-          </ul>
+          <table className="table">
+            <thead>
+              <tr>
+                <th>id</th>
+                <th>Имя</th>
+                <th>Возраст</th>
+                <th>Город</th>
+                <th>Вес</th>
+              </tr>
+            </thead>
+            <tbody>
+              {filteredPersons.map((person, id) => (
+                <tr key={id}>
+                  <td> {person.id}</td>
+                  <td>{person.name}</td>
+                  <td>{person.age}</td>
+                  <td>{person.city}</td>
+                  <td>{person.weight}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </content>
       </div>
     );
