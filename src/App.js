@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import '../src/App.css';
 
 class App extends Component {
   constructor(props) {
@@ -33,24 +34,28 @@ class App extends Component {
     const filteredPersons = searchText ? this.filterPersons() : persons;
 
     return (
-      <div>
-        <input
-          type="text"
-          placeholder="Search by name"
-          value={searchText}
-          onChange={this.handleChange}
-        />
-        <ul>
-          {filteredPersons.map((person, id) => (
-            <li key={id}>
-              {person.id}
-              {person.name}
-              {person.age}
-              {person.city}
-              {person.weight}
-            </li>
-          ))}
-        </ul>
+      <div className="interface">
+        <header>
+          <input
+            type="text"
+            placeholder="Результаты поиска"
+            value={searchText}
+            onChange={this.handleChange}
+          />
+        </header>
+        <content>
+          <ul>
+            {filteredPersons.map((person, id) => (
+              <li key={id}>
+                {person.id}
+                {person.name}
+                {person.age}
+                {person.city}
+                {person.weight}
+              </li>
+            ))}
+          </ul>
+        </content>
       </div>
     );
   }
