@@ -4,7 +4,7 @@ import '../src/App.css';
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = { persons: [], searchText: ' ' };
+    this.state = { persons: [], searchText: '' };
 
     this.handleChange = this.handleChange.bind(this);
     this.filterPersons = this.filterPersons.bind(this);
