@@ -6,7 +6,6 @@ class Search extends Component {
       persons: [],
       searchText: '',
     };
-
     this.handleChange = this.handleChange.bind(this);
   }
   handleChange(event) {
