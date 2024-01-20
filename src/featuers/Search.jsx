@@ -8,27 +8,36 @@ class Search extends Component {
     };
     this.handleChange = this.handleChange.bind(this);
   }
+
   handleChange(event) {
     this.setState({ searchText: event.target.value });
-    console.log(this);
+
+    this.filterPersons(event.target.value);
   }
+
   componentDidMount() {
     fetch('https://634fc8a3df22c2af7b59dc7a.mockapi.io/items')
       .then((response) => response.json())
       .then((data) => {
         this.setState({ persons: data });
+      })
+      .catch(() => {
+        this.setState({ persons: [] });
       });
   }
-  filterPersons() {
-    const { searchText, persons } = this.state;
-    const regex = new RegExp(searchText, 'gi');
 
-    return persons.filter((person) => person.name.match(regex));
+  filterPersons(name) {
+    fetch(`https://634fc8a3df22c2af7b59dc7a.mockapi.io/items?name=${name}`)
+      .then((response) => (response.status === 200 ? response.json() : []))
+      .then((data) => {
+        this.setState({ persons: data });
+      })
+      .catch(() => {
+        this.setState({ persons: [] });
+      });
   }
-  render() {
-    const { persons, searchText } = this.state;
 
-    const filteredPersons = searchText ? this.filterPersons() : persons;
+  render() {
     return (
       <div className="interface">
         <header>
@@ -40,15 +49,15 @@ class Search extends Component {
         </header>
         <content>
           <table>
-            <thread>
+            <thead>
               <th>id</th>
               <th>Имя</th>
               <th>Возраст</th>
               <th>Город</th>
               <th>Вес</th>
-            </thread>
+            </thead>
             <tbody>
-              {filteredPersons.map((person, id) => (
+              {this.state.persons.map((person, id) => (
                 <tr key={id}>
                   <td> {person.id}</td>
                   <td>{person.name}</td>
